@@ -1,34 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>API Project</title>
+    <title>RUPG</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 </head>
 
 <body>
-    <div class="container">	
-        <div class="user-container"></div>	
-        <div class="quote-container"></div>	
-        <div class="content-container">	
-            <div class="pokemon-container"></div>	
-            <div class="meat-container"></div>	
-        </div>	
-        <div class="friends">	
-            <h4>Friends</h4>	
-            <div class="friends-container">	
-            </div>	
-        </div>	
-        <div class="buttons">	
-            <button>Load User Data</button>	
-            <button>Display User</button>	
-        </div>	
+    <div class="container">
+        <div class="user-container"></div>
+        <div class="quote-container"></div>
+        <div class="content-container">
+            <div class="pokemon-container"></div>
+            <div class="meat-container"></div>
+        </div>
+        <div class="friends">
+            <div class="friends-container"></div>
+        </div>
+        <div class="buttons">
+            <button id="load" class='btn'>Load User Data</button>
+            <button id="display" class='btn'>Display User</button>
+            <button id="save" class='btn'>Save User Page</button>
+            <div class="dropup">
+                <button id="load-saved" class='btn'>Load User Page</button>
+                <div class="saved-users"></div>
+            </div>
+
+        </div>
     </div>
+
+    <script id="mainUser-temp" type="text/x-handlebars-template">
+        <img src = {{pic}} id = 'profile-pic'>
+        <div class='user-info'>{{firstName}} {{lastName}}<br>{{city}}, {{state}}</div>
+    </script>
+
+    <script id="friends-temp" type="text/x-handlebars-template">
+        <h4>Friends</h4>
+        {{#each friends}}
+            <br><div class='friend'> {{this.firstName}} {{this.lastName}}</div>
+        {{/each}}
+    </script>
+
+    <script id="quote-temp" type="text/x-handlebars-template">
+        <p class='quote-container'>Favorite Quote:<br>
+        {{quote}}<br> 
+        <strong>-Kanye West</strong></p>
+    </script>
+
+    <script id="pokemon-temp" type="text/x-handlebars-template">
+        <img src={{imageURL}} id ="pokemon-image">
+        <div id="pokemon-text">Favorite Pokemon: {{name}}</div>
+    </script>
+
+    <script id="meatText-temp" type="text/x-handlebars-template">
+        <p class='meat-text'>About me:<br>{{meatText}}</p>
+    </script>
+
+    <script id="saved-temp" type="text/x-handlebars-template">
+        {{#each savedUsers}}
+            <a class='saved-user'>{{this.user}}</a>          
+        {{/each}}
+    </script>
+
+    <script src='Renderer.js'></script>
+    <script src='APIManager.js'></script>
+    <script src='main.js'></script>
 </body>
 
 </html>
